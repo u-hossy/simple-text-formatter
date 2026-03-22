@@ -195,7 +195,7 @@ describe("formatText", () => {
 
     it("converts half width katakana to full width", () => {
       // Arrange
-      const text = "ｺﾝﾊﾞﾝﾜ､世界のＡＢＣabc１２３123さん｡";
+      const text = "ｺﾝﾊﾞﾝﾜ､｢世界のＡＢＣabc･１２３123｣さん｡";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -212,7 +212,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "コンバンワ、世界のＡＢＣabc１２３123さん。";
+      const expected = "コンバンワ、「世界のＡＢＣabc・１２３123」さん。";
 
       // Act
       const result = formatText(text, config);
@@ -339,7 +339,7 @@ describe("formatText", () => {
 
     it("converts full width katakana to half width", () => {
       // Arrange
-      const text = "コンバンワ、世界のＡＢＣabc１２３123さん。";
+      const text = "コンバンワ、「世界のＡＢＣabc・１２３123」さん。";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -356,7 +356,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "ｺﾝﾊﾞﾝﾜ､世界のＡＢＣabc１２３123さん｡";
+      const expected = "ｺﾝﾊﾞﾝﾜ､｢世界のＡＢＣabc･１２３123｣さん｡";
 
       // Act
       const result = formatText(text, config);
