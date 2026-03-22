@@ -130,4 +130,8 @@ describe("formatText", () => {
       expect(result).toBe(expected);
     });
   });
+
+  describe('type: "half-to-full"', () => {});
+
+  describe('type: "full-to-half"', () => {});
 });
