@@ -5,6 +5,39 @@ import { formatText } from "../src";
 import type { ReplacementSchema } from "../src/types/replacementSchema";
 
 describe("formatText", () => {
+  describe("common", () => {
+    it("skips process which enabled is false", () => {
+      // Arrange
+      const text = "せんせきせん";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: false,
+            type: "replace",
+            from: "せん",
+            to: "すん",
+            useRegex: false,
+          },
+          {
+            enabled: true,
+            type: "replace",
+            from: "せき",
+            to: "すき",
+            useRegex: false,
+          },
+        ],
+      };
+      const expected = "せんすきせん";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+  });
+
   describe('type: "replace"', () => {
     it("removes spaces in English", () => {
       // Arrange
@@ -94,36 +127,6 @@ describe("formatText", () => {
         ],
       };
       const expected = "すんせきすん";
-
-      // Act
-      const result = formatText(text, config);
-
-      // Assert
-      expect(result).toBe(expected);
-    });
-    it("skips process which enabled is false", () => {
-      // Arrange
-      const text = "せんせきせん";
-      const config: ReplacementSchema = {
-        schemaVersion: 1,
-        processes: [
-          {
-            enabled: false,
-            type: "replace",
-            from: "せん",
-            to: "すん",
-            useRegex: false,
-          },
-          {
-            enabled: true,
-            type: "replace",
-            from: "せき",
-            to: "すき",
-            useRegex: false,
-          },
-        ],
-      };
-      const expected = "せんすきせん";
 
       // Act
       const result = formatText(text, config);
