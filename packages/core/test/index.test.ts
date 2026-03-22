@@ -134,4 +134,6 @@ describe("formatText", () => {
   describe('type: "half-to-full"', () => {});
 
   describe('type: "full-to-half"', () => {});
+
+  describe("mixed type", () => {});
 });
