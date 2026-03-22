@@ -61,4 +61,4 @@ interface ReplacementSchema {
   processes: Process[];
 }
 
-export type { ReplacementSchema };
+export type { ConvertTarget, ReplacementSchema };

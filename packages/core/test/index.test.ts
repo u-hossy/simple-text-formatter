@@ -195,7 +195,7 @@ describe("formatText", () => {
 
     it("converts half width katakana to full width", () => {
       // Arrange
-      const text = "ｺﾝﾊﾞﾝﾜ世界のＡＢＣabc１２３123さん";
+      const text = "ｺﾝﾊﾞﾝﾜ､世界のＡＢＣabc１２３123さん｡";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -212,7 +212,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "コンバンワ世界のＡＢＣabc１２３123さん";
+      const expected = "コンバンワ、世界のＡＢＣabc１２３123さん。";
 
       // Act
       const result = formatText(text, config);
@@ -223,7 +223,7 @@ describe("formatText", () => {
 
     it("converts half width alphabets and spaces to full width", () => {
       // Arrange
-      const text = "Sample Japan合同会社";
+      const text = "Sample Japan  合同会社";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -240,7 +240,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "Ｓａｍｐｌｅ　Ｊａｐａｎ合同会社";
+      const expected = "Ｓａｍｐｌｅ　Ｊａｐａｎ　　合同会社";
 
       // Act
       const result = formatText(text, config);
@@ -339,7 +339,7 @@ describe("formatText", () => {
 
     it("converts full width katakana to half width", () => {
       // Arrange
-      const text = "コンバンワ世界のＡＢＣabc１２３123さん";
+      const text = "コンバンワ、世界のＡＢＣabc１２３123さん。";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -356,7 +356,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "ｺﾝﾊﾞﾝﾜ世界のＡＢＣabc１２３123さん";
+      const expected = "ｺﾝﾊﾞﾝﾜ､世界のＡＢＣabc１２３123さん｡";
 
       // Act
       const result = formatText(text, config);
@@ -367,7 +367,7 @@ describe("formatText", () => {
 
     it("converts full width alphabets and spaces to half width", () => {
       // Arrange
-      const text = "Ｓａｍｐｌｅ　Ｊａｐａｎ合同会社";
+      const text = "Ｓａｍｐｌｅ　Ｊａｐａｎ　　合同会社";
       const config: ReplacementSchema = {
         schemaVersion: 1,
         processes: [
@@ -384,7 +384,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "Sample Japan合同会社";
+      const expected = "Sample Japan  合同会社";
 
       // Act
       const result = formatText(text, config);

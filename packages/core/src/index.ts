@@ -1,4 +1,5 @@
 import type { ReplacementSchema } from "./types/replacementSchema";
+import { convertFullToHalf, convertHalfToFull } from "./utils/convertText";
 
 /**
  * テキストの整形を設定をもとに実行する
@@ -25,10 +26,10 @@ export const formatText = (text: string, config: ReplacementSchema): string => {
         }
         break;
       case "full-to-half":
-        result = "b";
+        result = convertFullToHalf(result, process.target);
         break;
       case "half-to-full":
-        result = "c";
+        result = convertHalfToFull(result, process.target);
         break;
       default: {
         const _exhaustiveCheck: never = process;
