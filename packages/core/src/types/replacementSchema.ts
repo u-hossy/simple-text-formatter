@@ -25,7 +25,9 @@ interface ReplaceProcess extends ProcessBase {
  * 半角/全角変換の対象となる文字種の指定
  */
 interface ConvertTarget {
+  alphabet: boolean;
   number: boolean;
+  katakana: boolean;
   space: boolean;
   symbol: boolean;
 }

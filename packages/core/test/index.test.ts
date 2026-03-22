@@ -136,9 +136,292 @@ describe("formatText", () => {
     });
   });
 
-  describe('type: "half-to-full"', () => {});
+  describe('type: "half-to-full"', () => {
+    it("converts half width numbers to full width", () => {
+      // Arrange
+      const text = "時は1582年";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "half-to-full",
+            target: {
+              alphabet: false,
+              number: true,
+              katakana: false,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "時は１５８２年";
 
-  describe('type: "full-to-half"', () => {});
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts half width alphabets to full width", () => {
+      // Arrange
+      const text = "Example Inc.";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "half-to-full",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "Ｅｘａｍｐｌｅ Ｉｎｃ.";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts half width katakana to full width", () => {
+      // Arrange
+      const text = "ｺﾝﾊﾞﾝﾜ世界のＡＢＣabc１２３123さん";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "half-to-full",
+            target: {
+              alphabet: false,
+              number: false,
+              katakana: true,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "コンバンワ世界のＡＢＣabc１２３123さん";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts half width alphabets and spaces to full width", () => {
+      // Arrange
+      const text = "Sample Japan合同会社";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "half-to-full",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: true,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "Ｓａｍｐｌｅ　Ｊａｐａｎ合同会社";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts half width alphabets and symbols to full width", () => {
+      // Arrange
+      const text =
+        "ABC! ＡＢＣ！ def@ ｄｅｆ＠ ghi# ｇｈｉ＃ (Test_01) [Data: 100%]";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "half-to-full",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: false,
+              symbol: true,
+            },
+          },
+        ],
+      };
+      const expected =
+        "ＡＢＣ！ ＡＢＣ！ ｄｅｆ＠ ｄｅｆ＠ １２３＃ １２３＃ （Ｔｅｓｔ＿０１） ［Ｄａｔａ： １００％］";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+  });
+
+  describe('type: "full-to-half"', () => {
+    it("converts full width numbers to half width", () => {
+      // Arrange
+      const text = "時は１５８２年";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "full-to-half",
+            target: {
+              alphabet: false,
+              number: true,
+              katakana: false,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "時は1582年";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts full width alphabets to half width", () => {
+      // Arrange
+      const text = "Ｅｘａｍｐｌｅ Ｉｎｃ.";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "full-to-half",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "Example Inc.";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts full width katakana to half width", () => {
+      // Arrange
+      const text = "コンバンワ世界のＡＢＣabc１２３123さん";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "full-to-half",
+            target: {
+              alphabet: false,
+              number: false,
+              katakana: true,
+              space: false,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "ｺﾝﾊﾞﾝﾜ世界のＡＢＣabc１２３123さん";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts full width alphabets and spaces to half width", () => {
+      // Arrange
+      const text = "Ｓａｍｐｌｅ　Ｊａｐａｎ合同会社";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "full-to-half",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: true,
+              symbol: false,
+            },
+          },
+        ],
+      };
+      const expected = "Sample Japan合同会社";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+
+    it("converts full width alphabets and symbols to half width", () => {
+      // Arrange
+      const text =
+        "ABC! ＡＢＣ！ def@ ｄｅｆ＠ ghi# ｇｈｉ＃ （Ｔｅｓｔ＿０１） ［Ｄａｔａ： 100％］";
+      const config: ReplacementSchema = {
+        schemaVersion: 1,
+        processes: [
+          {
+            enabled: true,
+            type: "full-to-half",
+            target: {
+              alphabet: true,
+              number: false,
+              katakana: false,
+              space: false,
+              symbol: true,
+            },
+          },
+        ],
+      };
+      const expected = "ABC! ABC! def@ def@ ghi# ghi# (Test_01) [Data: 100%]";
+
+      // Act
+      const result = formatText(text, config);
+
+      // Assert
+      expect(result).toBe(expected);
+    });
+  });
 
   describe("mixed type", () => {});
 });
