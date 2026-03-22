@@ -1,55 +1,10 @@
-/** スキーマのバージョン */
-type SchemaVersion = 1;
-
-// ── 共通のベース型 ────────────────────────────────────────
-
-interface ProcessBase {
-  label?: string;
-  enabled: boolean;
-}
-
-// ── 各プロセスの型 ──────────────────────────────────────
-
-interface ReplaceProcess extends ProcessBase {
-  type: "replace";
-  from: string;
-  to: string;
-  useRegex: boolean;
-}
-
-interface HalfToFullProcess extends ProcessBase {
-  type: "half-to-full";
-  target: ConvertTarget;
-}
-
-interface FullToHalfProcess extends ProcessBase {
-  type: "full-to-half";
-  target: ConvertTarget;
-}
-
-interface ConvertTarget {
-  number: boolean;
-  space: boolean;
-  symbol: boolean;
-}
-
-// ── Union型 ──────────────────────────────────────────────
-
-type Process = ReplaceProcess | HalfToFullProcess | FullToHalfProcess;
-
-// ── ルートの型 ───────────────────────────────────────────
-
-interface ReplacementSchema {
-  schemaVersion: SchemaVersion;
-  label: string;
-  processes: Process[];
-}
+import type { ReplacementSchema } from "./types/replacementSchema";
 
 /**
- * テキストの整形
+ * テキストの整形を設定をもとに実行する
  *
  * @param text 整形前テキスト
- * @param config 整形設定
+ * @param config 整形の設定オブジェクト
  * @returns 整形済みテキスト
  */
 export const formatText = (text: string, config: ReplacementSchema): string => {
