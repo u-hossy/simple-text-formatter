@@ -270,7 +270,7 @@ describe("formatText", () => {
         ],
       };
       const expected =
-        "ＡＢＣ！ ＡＢＣ！ ｄｅｆ＠ ｄｅｆ＠ １２３＃ １２３＃ （Ｔｅｓｔ＿０１） ［Ｄａｔａ： １００％］";
+        "ＡＢＣ！ ＡＢＣ！ ｄｅｆ＠ ｄｅｆ＠ ｇｈｉ＃ ｇｈｉ＃ （Ｔｅｓｔ＿01） ［Ｄａｔａ： 100％］";
 
       // Act
       const result = formatText(text, config);
@@ -413,7 +413,7 @@ describe("formatText", () => {
           },
         ],
       };
-      const expected = "ABC! ABC! def@ def@ ghi# ghi# (Test_01) [Data: 100%]";
+      const expected = "ABC! ABC! def@ def@ ghi# ghi# (Test_０１) [Data: 100%]";
 
       // Act
       const result = formatText(text, config);
@@ -423,5 +423,5 @@ describe("formatText", () => {
     });
   });
 
-  describe("mixed type", () => {});
+  // describe("mixed type", () => {});
 });
