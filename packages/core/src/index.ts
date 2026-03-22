@@ -39,7 +39,3 @@ export const formatText = (text: string, config: ReplacementSchema): string => {
 
   return result;
 };
-
-export function sum(a: number, b: number) {
-  return a + b;
-}
