@@ -1,5 +1,6 @@
 // TODO: テストケースをWeb UIで処理を実装するときに追加する
 
+import { v4 as uuid } from "uuid";
 import { describe, expect, it } from "vitest";
 import { formatText } from "../src";
 import type { ReplacementSchema } from "../src/types/replacementSchema";
@@ -13,6 +14,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: false,
             type: "replace",
             from: "せん",
@@ -20,6 +22,7 @@ describe("formatText", () => {
             useRegex: false,
           },
           {
+            id: uuid(),
             enabled: true,
             type: "replace",
             from: "せき",
@@ -46,6 +49,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "replace",
             from: " ",
@@ -70,6 +74,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "replace",
             from: "　",
@@ -94,6 +99,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "replace",
             from: "[ 　]",
@@ -118,6 +124,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "replace",
             from: "せん",
@@ -144,6 +151,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "half-to-full",
             target: {
@@ -172,6 +180,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "half-to-full",
             target: {
@@ -200,6 +209,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "half-to-full",
             target: {
@@ -228,6 +238,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "half-to-full",
             target: {
@@ -257,6 +268,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "half-to-full",
             target: {
@@ -288,6 +300,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "full-to-half",
             target: {
@@ -316,6 +329,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "full-to-half",
             target: {
@@ -344,6 +358,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "full-to-half",
             target: {
@@ -372,6 +387,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "full-to-half",
             target: {
@@ -401,6 +417,7 @@ describe("formatText", () => {
         schemaVersion: 1,
         processes: [
           {
+            id: uuid(),
             enabled: true,
             type: "full-to-half",
             target: {

@@ -7,6 +7,7 @@ type SchemaVersion = 1;
  * すべての置換処理に共通する基本プロパティ
  */
 interface ProcessBase {
+  id: string;
   label?: string;
   enabled: boolean;
 }
