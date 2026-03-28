@@ -1,4 +1,11 @@
-import type { Process, ReplacementSchema } from "./types/replacementSchema";
+import type {
+  ConvertTarget,
+  FullToHalfProcess,
+  HalfToFullProcess,
+  Process,
+  ReplacementSchema,
+  ReplaceProcess,
+} from "./types/replacementSchema";
 import { convertFullToHalf, convertHalfToFull } from "./utils/convertText";
 
 /**
@@ -40,5 +47,12 @@ const formatText = (text: string, config: ReplacementSchema): string => {
   return result;
 };
 
-export type { Process, ReplacementSchema };
+export type {
+  ConvertTarget,
+  FullToHalfProcess,
+  HalfToFullProcess,
+  Process,
+  ReplacementSchema,
+  ReplaceProcess,
+};
 export { formatText };

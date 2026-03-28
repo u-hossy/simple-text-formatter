@@ -62,4 +62,11 @@ interface ReplacementSchema {
   processes: Process[];
 }
 
-export type { ConvertTarget, Process, ReplacementSchema };
+export type {
+  ConvertTarget,
+  FullToHalfProcess,
+  HalfToFullProcess,
+  Process,
+  ReplacementSchema,
+  ReplaceProcess,
+};
