@@ -19,6 +19,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 interface Props {
   process: Process;
@@ -141,7 +142,9 @@ export default function ProcessConfigCard({
   setProcesses,
   isTopProcess,
   isBottomProcess,
-}: Props) {
+  className,
+  ...props
+}: Props & React.ComponentProps<"div">) {
   const title = processConfigTitles[process.type];
 
   if (!title) {
@@ -212,7 +215,7 @@ export default function ProcessConfigCard({
   }
 
   return (
-    <Card className="min-h-fit min-w-80 max-w-3xl">
+    <Card {...props} className={cn("min-h-fit min-w-80", className)}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{process.label}</CardDescription>
@@ -222,7 +225,7 @@ export default function ProcessConfigCard({
         <ButtonGroup>
           <Button variant="outline" onClick={moveUp} disabled={isTopProcess}>
             <MoveUpIcon />
-            1つ上に
+            上へ
           </Button>
           <Button
             variant="outline"
@@ -230,13 +233,13 @@ export default function ProcessConfigCard({
             disabled={isBottomProcess}
           >
             <MoveDownIcon />
-            1つ下に
+            下へ
           </Button>
         </ButtonGroup>
         <ButtonGroup>
           <Button variant="destructive" onClick={deleteProcess}>
             <Trash2Icon />
-            この処理を削除
+            削除
           </Button>
         </ButtonGroup>
       </CardFooter>
