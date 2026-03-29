@@ -1,6 +1,13 @@
 import type { Process } from "@simple-text-formatter/core";
 import { Import, Plus, ReplaceAll, SquareArrowRightExit } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Empty,
   EmptyContent,
@@ -23,6 +30,33 @@ interface Props {
 }
 
 export default function ProcessConfigArea({ processes, setProcesses }: Props) {
+  const handleAddProcess = (type: Process["type"]) => {
+    let newProcess: Process;
+    const base = { id: uuidv4(), enabled: true, label: "" };
+
+    switch (type) {
+      case "replace":
+        newProcess = { ...base, type, from: "", to: "", useRegex: false };
+        break;
+      case "half-to-full":
+      case "full-to-half":
+        newProcess = {
+          ...base,
+          type,
+          target: {
+            alphabet: false,
+            number: false,
+            katakana: false,
+            space: false,
+            symbol: false,
+          },
+        };
+        break;
+    }
+
+    setProcesses((prev) => [...prev, newProcess]);
+  };
+
   return (
     <div className="flex flex-col h-full gap-2">
       <h2 className="font-semibold">処理設定</h2>
@@ -44,10 +78,31 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
                 />
               ))}
               <div className="flex flex-row justify-center gap-2">
-                <Button>
-                  <Plus />
-                  処理の追加
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button>
+                      <Plus />
+                      処理の追加
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("replace")}
+                    >
+                      テキスト置換
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("half-to-full")}
+                    >
+                      半角から全角に変換
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("full-to-half")}
+                    >
+                      全角から半角に変換
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <Button variant="outline">
                   <SquareArrowRightExit />
                   変換処理のエクスポート
@@ -66,10 +121,31 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
                 </EmptyDescription>
               </EmptyHeader>
               <EmptyContent className="flex-row justify-center gap-2">
-                <Button>
-                  <Plus />
-                  処理の追加
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button>
+                      <Plus />
+                      処理の追加
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("replace")}
+                    >
+                      テキスト置換
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("half-to-full")}
+                    >
+                      半角から全角に変換
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleAddProcess("full-to-half")}
+                    >
+                      全角から半角に変換
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <Button variant="outline">
                   <Import />
                   変換処理のインポート
