@@ -11,7 +11,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.8",
     "@types/moji": "^0.5.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   },
   "dependencies": {
     "moji": "^0.5.1",
