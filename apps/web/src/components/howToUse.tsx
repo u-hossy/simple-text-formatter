@@ -4,11 +4,13 @@ export default function HowToUse() {
       <section className="space-y-2">
         <h3 className="text-base font-semibold">できること</h3>
         <p className="text-muted-foreground">
-          2026年3月現在以下の機能に対応しています。
+          2026年3月現在以下の機能に対応しています
         </p>
-        <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-1">
-          <li>テキストの置換（正規表現を使用することも可能です）</li>
-          <li>数字、アルファベット、カタカナ、空白、記号の全角と半角の変換</li>
+        <ul className="list-disc list-outside space-y-2 text-muted-foreground ml-5">
+          <li>テキストの置換 （正規表現を使用することも可能です）</li>
+          <li>
+            全角と半角の変換（数字、アルファベット、カタカナ、空白、記号）
+          </li>
         </ul>
       </section>
 
