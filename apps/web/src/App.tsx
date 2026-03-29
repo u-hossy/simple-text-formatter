@@ -1,5 +1,6 @@
 import type { Process } from "@simple-text-formatter/core";
-import { useState } from "react";
+import { formatText } from "@simple-text-formatter/core";
+import { useMemo, useState } from "react";
 import InputArea from "@/components/InputArea";
 import OutputArea from "@/components/OutputArea";
 import ProcessConfigArea from "@/components/ProcessConfigArea";
@@ -34,7 +35,13 @@ function App() {
       },
     },
   ]);
-  const [convertedText, _setConvertedText] = useState<string>("");
+  const convertedText = useMemo(() => {
+    const config = {
+      schemaVersion: 1 as const,
+      processes: processes,
+    };
+    return formatText(inputText, config);
+  }, [inputText, processes]);
 
   return (
     <div className="flex flex-col h-screen min-h-96">
