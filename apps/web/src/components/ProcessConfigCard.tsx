@@ -5,12 +5,7 @@ import type {
   Process,
   ReplaceProcess,
 } from "@simple-text-formatter/core";
-import {
-  ChevronDownIcon,
-  MoveDownIcon,
-  MoveUpIcon,
-  Trash2Icon,
-} from "lucide-react";
+import { MoveDownIcon, MoveUpIcon, Trash2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import {
@@ -22,12 +17,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -43,45 +32,12 @@ interface ControlPanelProps<T extends Process> {
   onChange: (updates: Partial<T>) => void;
 }
 
-const replacePresets = [
-  { label: "改行を削除", updates: { from: "\n", to: "", useRegex: false } },
-  {
-    label: "連続する空白を1つにする",
-    updates: { from: " +", to: " ", useRegex: true },
-  },
-  {
-    label: "タブをスペース2つに",
-    updates: { from: "\t", to: "  ", useRegex: false },
-  },
-];
-
 function ReplaceControlPanel({
   process,
   onChange,
 }: ControlPanelProps<ReplaceProcess>) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
-              プリセットをロード
-              <ChevronDownIcon className="ml-2 w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {replacePresets.map((preset) => (
-              <DropdownMenuItem
-                key={preset.label}
-                // biome-ignore lint/suspicious/noExplicitAny: type erasure for onChange
-                onClick={() => onChange(preset.updates as any)}
-              >
-                {preset.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor={`from-${process.id}`}>置換前</Label>
@@ -122,108 +78,18 @@ const convertTargetLabels: Record<keyof ConvertTarget, string> = {
   symbol: "記号",
 };
 
-const fullToHalfPresets = [
-  {
-    label: "全角スペースを半角にする",
-    updates: {
-      target: {
-        alphabet: false,
-        number: false,
-        katakana: false,
-        space: true,
-        symbol: false,
-      },
-    },
-  },
-  {
-    label: "英数字と記号を半角にする",
-    updates: {
-      target: {
-        alphabet: true,
-        number: true,
-        katakana: false,
-        space: false,
-        symbol: true,
-      },
-    },
-  },
-  {
-    label: "すべて半角にする",
-    updates: {
-      target: {
-        alphabet: true,
-        number: true,
-        katakana: true,
-        space: true,
-        symbol: true,
-      },
-    },
-  },
-];
-
 function FullToHalfControlPanel({
   process,
   onChange,
 }: ControlPanelProps<FullToHalfProcess>) {
-  return (
-    <ConvertControlPanelBase
-      process={process}
-      onChange={onChange}
-      presets={fullToHalfPresets}
-    />
-  );
+  return <ConvertControlPanelBase process={process} onChange={onChange} />;
 }
-
-const halfToFullPresets = [
-  {
-    label: "半角カタカナを全角にする",
-    updates: {
-      target: {
-        alphabet: false,
-        number: false,
-        katakana: true,
-        space: false,
-        symbol: false,
-      },
-    },
-  },
-  {
-    label: "英数字を全角にする",
-    updates: {
-      target: {
-        alphabet: true,
-        number: true,
-        katakana: false,
-        space: false,
-        symbol: false,
-      },
-    },
-  },
-  {
-    label: "すべて全角にする",
-    updates: {
-      target: {
-        alphabet: true,
-        number: true,
-        katakana: true,
-        space: true,
-        symbol: true,
-      },
-    },
-  },
-];
 
 function HalfToFullControlPanel({
   process,
   onChange,
 }: ControlPanelProps<HalfToFullProcess>) {
-  return (
-    <ConvertControlPanelBase
-      process={process}
-      onChange={onChange}
-      presets={halfToFullPresets}
-    />
-  );
+  return <ConvertControlPanelBase process={process} onChange={onChange} />;
 }
 
 function ConvertControlPanelBase<
@@ -231,12 +97,9 @@ function ConvertControlPanelBase<
 >({
   process,
   onChange,
-  presets,
 }: {
   process: T;
   onChange: (updates: Partial<T>) => void;
-  // biome-ignore lint/suspicious/noExplicitAny: generic updates
-  presets: { label: string; updates: any }[];
 }) {
   const toggleTarget = (key: keyof ConvertTarget, checked: boolean) => {
     onChange({
@@ -249,26 +112,6 @@ function ConvertControlPanelBase<
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
-              プリセットをロード
-              <ChevronDownIcon className="ml-2 w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {presets.map((preset) => (
-              <DropdownMenuItem
-                key={preset.label}
-                onClick={() => onChange(preset.updates)}
-              >
-                {preset.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div className="flex flex-wrap gap-4">
         {(
           Object.entries(convertTargetLabels) as [keyof ConvertTarget, string][]
