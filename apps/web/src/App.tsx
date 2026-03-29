@@ -39,7 +39,7 @@ function App() {
 
   return (
     <ThemeProvider storageKey="vite-ui-theme">
-      <div className="flex flex-col h-screen min-h-fit min-w-sm">
+      <div className="flex flex-col h-svh min-h-fit min-w-sm">
         <header className="flex flex-row items-center justify-between h-14 shrink-0 px-2 md:px-6 border-b border-border">
           <div className="flex flex-row items-center">
             <span className="font-bold inline-block">テキスト整形くん</span>
