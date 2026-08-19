@@ -57,7 +57,7 @@ function ReplaceControlPanel({
           />
         </div>
       </div>
-      <div className="flex items-center space-x-2 mt-2">
+      <div className="mt-2 flex items-center space-x-2">
         <Checkbox
           id={`regex-${process.id}`}
           checked={process.useRegex}

@@ -56,7 +56,7 @@ function ScrollHintBox({
       <div
         ref={ref}
         data-slot="scroll-hint-box"
-        className={cn("h-full overflow-y-auto touch-auto!", className)}
+        className={cn("touch-auto! h-full overflow-y-auto", className)}
         {...props}
       >
         {children}

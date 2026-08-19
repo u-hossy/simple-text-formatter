@@ -1,12 +1,12 @@
 export default function HowToUse() {
   return (
-    <div className="space-y-6 text-sm text-foreground">
+    <div className="space-y-6 text-foreground text-sm">
       <section className="space-y-2">
-        <h3 className="text-base font-semibold">できること</h3>
+        <h3 className="font-semibold text-base">できること</h3>
         <p className="text-muted-foreground">
           2026年3月現在以下の機能に対応しています
         </p>
-        <ul className="list-disc list-outside space-y-2 text-muted-foreground ml-5">
+        <ul className="ml-5 list-outside list-disc space-y-2 text-muted-foreground">
           <li>テキストの置換 （正規表現を使用することも可能です）</li>
           <li>
             全角と半角の変換（数字、アルファベット、カタカナ、空白、記号）
@@ -15,11 +15,11 @@ export default function HowToUse() {
       </section>
 
       <section className="space-y-4">
-        <h3 className="text-base font-semibold">使い方</h3>
+        <h3 className="font-semibold text-base">使い方</h3>
 
         <div className="space-y-2">
           <h4 className="font-medium">はじめて使用される方</h4>
-          <ol className="list-decimal list-outside space-y-2 text-muted-foreground ml-5">
+          <ol className="ml-5 list-outside list-decimal space-y-2 text-muted-foreground">
             <li>
               画面上部の
               <strong className="font-semibold">テキストの入力</strong>
@@ -48,7 +48,7 @@ export default function HowToUse() {
 
         <div className="space-y-2">
           <h4 className="font-medium">変換処理設定ファイルをお持ちの方</h4>
-          <ol className="list-decimal list-outside space-y-2 text-muted-foreground ml-5">
+          <ol className="ml-5 list-outside list-decimal space-y-2 text-muted-foreground">
             <li>
               画面上部の
               <strong className="font-semibold">テキストの入力</strong>
@@ -70,7 +70,7 @@ export default function HowToUse() {
       </section>
 
       <section className="space-y-2">
-        <h3 className="text-base font-semibold">バグや不具合を見つけたら</h3>
+        <h3 className="font-semibold text-base">バグや不具合を見つけたら</h3>
         <p className="text-muted-foreground">
           お気軽にGithubのIssueに書き込んでいただければ幸いです。Pull
           Requestも大歓迎です。

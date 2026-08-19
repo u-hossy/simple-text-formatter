@@ -114,7 +114,7 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
 
   const listContent =
     processes.length > 0 ? (
-      <div className="flex flex-col gap-4 my-4">
+      <div className="my-4 flex flex-col gap-4">
         {processes.map((process, index) => (
           <ProcessConfigCard
             process={process}
@@ -202,7 +202,7 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
     );
 
   return (
-    <div className="flex flex-col h-full gap-2">
+    <div className="flex h-full flex-col gap-2">
       <input
         type="file"
         ref={fileInputRef}
@@ -212,7 +212,7 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
       />
       <h2 className="font-semibold">処理設定</h2>
       <ScrollHintBox
-        className="min-h-[32vh] max-h-[55vh] border-y"
+        className="max-h-[55vh] min-h-[32vh] border-y"
         deps={[processes.length]}
       >
         {listContent}
