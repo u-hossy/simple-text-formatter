@@ -17,11 +17,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
+import { ScrollHintBox } from "@/components/ui/scroll-hint";
 
 import ProcessConfigCard from "./ProcessConfigCard";
 
@@ -116,6 +112,95 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
     reader.readAsText(file);
   };
 
+  const listContent =
+    processes.length > 0 ? (
+      <div className="flex flex-col gap-4 my-4">
+        {processes.map((process, index) => (
+          <ProcessConfigCard
+            process={process}
+            setProcesses={setProcesses}
+            isTopProcess={index === 0}
+            isBottomProcess={index === processes.length - 1}
+            className="mx-4 w-[100%-2rem]"
+            key={process.id}
+          />
+        ))}
+        <div className="flex flex-row justify-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>
+                <Plus />
+                処理の追加
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => handleAddProcess("replace")}>
+                テキスト置換
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleAddProcess("half-to-full")}
+              >
+                半角から全角に変換
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleAddProcess("full-to-half")}
+              >
+                全角から半角に変換
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button variant="outline" onClick={handleExport}>
+            <SquareArrowRightExit />
+            変換処理のエクスポート
+          </Button>
+        </div>
+      </div>
+    ) : (
+      <Empty className="flex-1">
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <ReplaceAll />
+          </EmptyMedia>
+          <EmptyTitle>変換処理を追加してください</EmptyTitle>
+          <EmptyDescription>
+            テキストを整形する処理ルールをここで指定できます
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent className="flex-row justify-center gap-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>
+                <Plus />
+                処理の追加
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => handleAddProcess("replace")}>
+                テキスト置換
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleAddProcess("half-to-full")}
+              >
+                半角から全角に変換
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleAddProcess("full-to-half")}
+              >
+                全角から半角に変換
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Import />
+            変換処理のインポート
+          </Button>
+        </EmptyContent>
+      </Empty>
+    );
+
   return (
     <div className="flex flex-col h-full gap-2">
       <input
@@ -126,108 +211,12 @@ export default function ProcessConfigArea({ processes, setProcesses }: Props) {
         onChange={handleImport}
       />
       <h2 className="font-semibold">処理設定</h2>
-      <ResizablePanelGroup orientation="horizontal">
-        <ResizablePanel
-          defaultSize="100%"
-          className="flex flex-col border-y mr-2"
-        >
-          {processes.length > 0 ? (
-            <div className="flex flex-col gap-4 my-4">
-              {processes.map((process, index) => (
-                <ProcessConfigCard
-                  process={process}
-                  setProcesses={setProcesses}
-                  isTopProcess={index === 0}
-                  isBottomProcess={index === processes.length - 1}
-                  className="mx-4 w-[100%-2rem]"
-                  key={process.id}
-                />
-              ))}
-              <div className="flex flex-row justify-center gap-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button>
-                      <Plus />
-                      処理の追加
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("replace")}
-                    >
-                      テキスト置換
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("half-to-full")}
-                    >
-                      半角から全角に変換
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("full-to-half")}
-                    >
-                      全角から半角に変換
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                <Button variant="outline" onClick={handleExport}>
-                  <SquareArrowRightExit />
-                  変換処理のエクスポート
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <Empty className="flex-1">
-              <EmptyHeader>
-                <EmptyMedia variant="icon">
-                  <ReplaceAll />
-                </EmptyMedia>
-                <EmptyTitle>変換処理を追加してください</EmptyTitle>
-                <EmptyDescription>
-                  テキストを整形する処理ルールをここで指定できます
-                </EmptyDescription>
-              </EmptyHeader>
-              <EmptyContent className="flex-row justify-center gap-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button>
-                      <Plus />
-                      処理の追加
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("replace")}
-                    >
-                      テキスト置換
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("half-to-full")}
-                    >
-                      半角から全角に変換
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => handleAddProcess("full-to-half")}
-                    >
-                      全角から半角に変換
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                <Button
-                  variant="outline"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <Import />
-                  変換処理のインポート
-                </Button>
-              </EmptyContent>
-            </Empty>
-          )}
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel>
-          {/* TODO: ここに使い方とか正規表現のヒントを書く */}
-        </ResizablePanel>
-      </ResizablePanelGroup>
+      <ScrollHintBox
+        className="min-h-[32vh] max-h-[55vh] border-y"
+        deps={[processes.length]}
+      >
+        {listContent}
+      </ScrollHintBox>
     </div>
   );
 }
