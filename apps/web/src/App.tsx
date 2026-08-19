@@ -9,7 +9,6 @@ import OutputArea from "@/components/OutputArea";
 import ProcessConfigArea from "@/components/ProcessConfigArea";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
-
 import {
   Dialog,
   DialogClose,
@@ -20,11 +19,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
 
 function App() {
   const [inputText, setInputText] = useState<string>("");
@@ -39,8 +33,8 @@ function App() {
 
   return (
     <ThemeProvider storageKey="vite-ui-theme">
-      <div className="flex flex-col h-svh min-h-fit min-w-sm">
-        <header className="flex flex-row items-center justify-between h-14 shrink-0 px-2 md:px-6 border-b border-border">
+      <div className="flex min-h-svh min-w-sm flex-col">
+        <header className="sticky top-0 z-10 flex flex-row items-center justify-between h-14 shrink-0 px-2 md:px-6 border-b border-border bg-background">
           <div className="flex flex-row items-center">
             <span className="font-bold inline-block">テキスト整形くん</span>
           </div>
@@ -85,23 +79,18 @@ function App() {
             <ModeToggle />
           </div>
         </header>
-        <main className="flex-1 min-h-0">
-          <ResizablePanelGroup orientation="vertical">
-            <ResizablePanel minSize={20} className="px-2 md:px-6 py-1 my-2">
-              <InputArea inputText={inputText} setInputText={setInputText} />
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel minSize={20} className="px-2 md:px-6 py-1 my-2">
-              <ProcessConfigArea
-                processes={processes}
-                setProcesses={setProcesses}
-              />
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel minSize={20} className="px-2 md:px-6 py-1 my-2">
-              <OutputArea convertedText={convertedText} />
-            </ResizablePanel>
-          </ResizablePanelGroup>
+        <main className="flex flex-1 flex-col gap-4 px-2 py-3 md:px-6">
+          <InputArea inputText={inputText} setInputText={setInputText} />
+          <ProcessConfigArea
+            processes={processes}
+            setProcesses={setProcesses}
+          />
+          <section className="flex flex-col min-h-[28vh] max-h-[45vh]">
+            <OutputArea
+              className="flex-1 min-h-0"
+              convertedText={convertedText}
+            />
+          </section>
         </main>
       </div>
     </ThemeProvider>
