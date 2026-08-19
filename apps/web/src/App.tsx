@@ -34,9 +34,9 @@ function App() {
   return (
     <ThemeProvider storageKey="vite-ui-theme">
       <div className="flex min-h-svh min-w-sm flex-col">
-        <header className="sticky top-0 z-10 flex flex-row items-center justify-between h-14 shrink-0 px-2 md:px-6 border-b border-border bg-background">
+        <header className="sticky top-0 z-10 flex h-14 shrink-0 flex-row items-center justify-between border-border border-b bg-background px-2 md:px-6">
           <div className="flex flex-row items-center">
-            <span className="font-bold inline-block">テキスト整形くん</span>
+            <span className="inline-block font-bold">テキスト整形くん</span>
           </div>
           <div className="flex flex-row items-center gap-2">
             <Button variant="link">
@@ -66,7 +66,7 @@ function App() {
                     このツールはテキストの整形とその処理ルールの出力・読み込みができます
                   </DialogDescription>
                 </DialogHeader>
-                <div className="-mx-4 no-scrollbar max-h-[50vh] overflow-y-auto px-4">
+                <div className="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
                   <HowToUse />
                 </div>
                 <DialogFooter>
@@ -85,9 +85,9 @@ function App() {
             processes={processes}
             setProcesses={setProcesses}
           />
-          <section className="flex flex-col min-h-[28vh] max-h-[45vh]">
+          <section className="flex max-h-[45vh] min-h-[28vh] flex-col">
             <OutputArea
-              className="flex-1 min-h-0"
+              className="min-h-0 flex-1"
               convertedText={convertedText}
             />
           </section>

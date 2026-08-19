@@ -17,7 +17,7 @@ export default function OutputArea({ convertedText, className }: Props) {
   ]);
 
   return (
-    <div className={cn("flex flex-col h-full gap-2", className)}>
+    <div className={cn("flex h-full flex-col gap-2", className)}>
       <h2 className="font-semibold">
         <label htmlFor={id}>結果確認</label>
       </h2>
