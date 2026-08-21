@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "moji": "^0.5.1",
-    "uuid": "^14.0.1"
+    "uuid": "^14.0.2"
   },
   "packageManager": "pnpm@10.33.0"
 }
